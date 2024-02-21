@@ -1,0 +1,10 @@
+<library path="robix_firmware">
+    <class name="robix_firmware/RobixInterface"
+      type="robix_firmware::RobixInterface"
+      base_class_type="hardware_interface::SystemInterface"
+    >
+      <description>
+        Robix Hardware Interface
+      </description>
+    </class>
+  </library>

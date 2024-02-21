@@ -1,0 +1,158 @@
+<?xml version="1.0"?>
+
+<robot name="robix" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+	  <!-- Include ros2_control Plugins -->
+  	<xacro:include filename="$(find robix_description)/urdf/robix_ros2_control.xacro" />
+	
+	<!--xacro:arg name="is_sim" default="false"/-->
+
+	<link name="base_footprint"/>  
+
+	<link name="base_link"> 
+		<visual>
+			<origin xyz="0 0 0.08"/>
+			<geometry>
+				<box size="0.34 0.30 0.20"/>
+			</geometry>
+		</visual>
+		<collision>
+			<origin xyz="0 0 0"/>
+			<geometry>
+				<box size="0.34 0.30 0.20"/>
+			</geometry>
+		</collision>
+	</link>
+	
+	<!-- Primer Joint -->
+
+	<joint name="base_joint" type="fixed"> 
+		<parent link="base_footprint"/>
+		<child link="base_link"/>
+		<origin xyz="0 0 0.08"/>
+	</joint>
+
+	<link name="laser"> 
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<cylinder radius="0.1" length="0.06"/>
+			</geometry>
+		</visual>
+		<collision>
+			<origin xyz="0 0 0"/>
+			<geometry>
+				<box size="0.34 0.30 0.20"/>
+			</geometry>
+		</collision>
+	</link>
+
+	<joint name="base_scan_joint" type="fixed"> 
+		<parent link="base_link"/>
+		<child link="laser"/>
+		<origin xyz="0 0 0.50 " rpy="0 0 0"/>
+	</joint>
+
+	<!-- Rueda Derecha -->
+
+	<link name="right_wheel_link" > 
+		<visual>
+			<origin xyz="0 0 0" rpy="1.57 0 0"/>
+			<geometry>
+				<cylinder radius="0.033" length="0.026"/>
+			</geometry>
+		</visual>
+		<collision>
+			<origin xyz="0 0 0" rpy="1.57 0 0"/>
+			<geometry>
+				<cylinder radius="0.033" length="0.026"/>
+			</geometry>
+		</collision>
+	</link>
+
+	<!-- Joint con Rueda Derecha -->
+
+	<joint name="wheel_right_joint" type="continuous"> 
+		<parent link="base_link"/>
+		<child link="right_wheel_link" />
+		<origin xyz="0.17 -0.15 0"/>
+		<axis xyz="0 1 0" />
+	</joint>
+
+	<!-- Rueda Izquierda -->
+
+	<link name="left_wheel_link" > 
+		<visual>
+			<origin xyz="0 0 0" rpy="1.57 0 0"/>
+			<geometry>
+				<cylinder radius="0.033" length="0.026"/>
+			</geometry>
+		</visual>
+		<collision>
+			<origin xyz="0 0 0" rpy="1.57 0 0"/>
+			<geometry>
+				<cylinder radius="0.033" length="0.026"/>
+			</geometry>
+		</collision>
+	</link>
+
+	<joint name="wheel_left_joint" type="continuous"> 
+		<parent link="base_link"/>
+		<child link="left_wheel_link" />
+		<origin xyz="0.17 0.15 0"/>
+		<axis xyz="0 1 0" />
+	</joint>
+
+
+
+	<!-- Rueda Loca Derecha -->
+
+	<link name="right_caster_wheel_link" > 
+		<visual>
+			<origin xyz="0 0 0" rpy="1.57 0 0"/>
+			<geometry>
+				<cylinder radius="0.033" length="0.026"/>
+			</geometry>
+		</visual>
+		<collision>
+			<origin xyz="0 0 0" rpy="1.57 0 0"/>
+			<geometry>
+				<cylinder radius="0.033" length="0.026"/>
+			</geometry>
+		</collision>
+	</link>
+
+	<joint name="wheel_right_caster_joint" type="fixed"> 
+		<parent link="base_link"/>
+		<child link="right_caster_wheel_link" />
+		<origin xyz="-0.17 -0.15 0"/>
+	</joint>
+
+
+	<!-- Rueda Loca Izquierda -->
+
+	<link name="left_caster_wheel_link" > 
+		<visual>
+			<origin xyz="0 0 0" rpy="1.57 0 0"/>
+			<geometry>
+				<cylinder radius="0.033" length="0.026"/>
+			</geometry>
+		</visual>
+		<collision>
+			<origin xyz="0 0 0" rpy="1.57 0 0"/>
+			<geometry>
+				<cylinder radius="0.033" length="0.026"/>
+			</geometry>
+		</collision>
+	</link>
+
+	<!-- Joint con Rueda Izquierda -->
+
+	<joint name= "wheel_left_caster_joint" type="fixed"> 
+		<parent link="base_link"/>
+		<child link="left_caster_wheel_link" />
+		<origin xyz="-0.17 0.15 0"/>
+	</joint>
+
+	
+</robot>
